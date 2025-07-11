@@ -1,11 +1,8 @@
-const express = require('express');
-const app = express();
-app.use(express.json());
-
-app.post('/sms', (req, res) => {
-  console.log('SMS Received:', req.body);
-  res.status(200).send('SMS received!');
-});
-
-// Export the express app as a Vercel handler
-module.exports = app;
+export default function handler(req, res) {
+  if (req.method === 'POST') {
+    console.log('📩 SMS Received:', req.body); // Vercel Logs లో కనిపిస్తుంది
+    res.status(200).send('✅ SMS received!');
+  } else {
+    res.status(405).send('❌ Method Not Allowed');
+  }
+}
